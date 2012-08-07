@@ -55,7 +55,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                 <EditFormSettings InsertCaption="Pievienot nākamo apdrošināto" CaptionFormatString="Labot apdrošināto" EditFormType="Template" PopUpSettings-Modal="true" >
                     <EditColumn ButtonType="ImageButton"  />
                     <FormTemplate>
-                        <table id="Table1" cellspacing="1" cellpadding="1" width="250" border="0">
+                        <table id="tblEditTemplate" cellspacing="1" cellpadding="1" width="350" border="0">
                             <tr>
                                 <td>
                                     Pers. Kods:

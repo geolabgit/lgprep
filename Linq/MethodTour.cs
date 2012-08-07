@@ -21,7 +21,6 @@ namespace TelerikGreed.Linq
                                    PersKods = oneRow.PersKods,
                                    ApdrNemajs = oneRow.ApdrNemajs.Value,
                                    Apstaklis_ID = oneRow.Apstaklis_ID.Value,
-                                   Apstaklis = "---",
                                    SpecDatumsNo = oneRow.SpecDatumsNo,
                                    SpecDatumsLi = oneRow.SpecDatumsLi,
                                    Fransize = oneRow.Fransize.Value,

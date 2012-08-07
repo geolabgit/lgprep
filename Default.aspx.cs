@@ -108,7 +108,7 @@ namespace TelerikGreed
             {
                 txtPersKods.Focus();
                 return;
-            } while (txtPersKods.Text.Length < 11) ;
+            }
             var TouristVU = MethodTour.GetTouristVardUzvard(txtPersKods.Text);
             if (TouristVU == null)
             {
