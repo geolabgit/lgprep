@@ -12,13 +12,11 @@ namespace TelerikGreed
     {
         //List<TouristInfo> lstTourists;
         int intTerritoryID = 1;
+        int intTouristsTableID = 2820052;  //   2819550
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
-                Session["lstTourists"] = MethodTour.GetTouristList(2820052, intTerritoryID); //   2819550
-                //MethodTour.FillApstDDL(ddlApstaklis, 0, 0);
-            }
+                Session["lstTourists"] = MethodTour.GetTouristList(intTouristsTableID, intTerritoryID);
         }
 
         protected void grdTouristsList_NeedDataSource(object source, GridNeedDataSourceEventArgs e)
@@ -36,8 +34,7 @@ namespace TelerikGreed
             if (e.Item is GridEditableItem && (e.Item.IsInEditMode))
             {
                 Session["editableItem"] = (GridEditableItem)e.Item;
-                GridEditableItem editableItem = (GridEditableItem)e.Item;
-                SetupInputManager(editableItem);
+                SetupInputManager((GridEditableItem)e.Item);
             }
         }
 

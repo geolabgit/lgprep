@@ -6,6 +6,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 
     <telerik:RadScriptManager ID="RadScriptManager1" runat="server" />
+    <telerik:RadFormDecorator runat="server" ID="m_FormDecorator" DecoratedControls="All" />
     <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
 
         <script type="text/javascript">
@@ -25,7 +26,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadFormDecorator runat="server" ID="m_FormDecorator" DecoratedControls="All" />
+
     <telerik:RadAjaxLoadingPanel runat="server" ID="RadAjaxLoadingPanel1" />
     <h2>
         Welcome to ASP.NET!
@@ -63,8 +64,8 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                                 <td>
                                     <telerik:RadMaskedTextBox ID="txtPersKods" runat="server" SelectionOnFocus="SelectAll" AutoPostBack="True" Text='<%# Bind( "PersKods") %>'
                                                               PromptChar="_" Width="85px" Mask="###########" OnTextChanged="txtPersKods_OnTextChanged">
-                                                              <%--PromptChar="_" Width="85px" Mask="<0..4><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9>" OnTextChanged="txtPersKods_OnTextChanged">--%>
-                                     </telerik:RadMaskedTextBox>
+                                    <%--PromptChar="_" Width="85px" Mask="<0..4><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9>" OnTextChanged="txtPersKods_OnTextChanged">--%>
+                                    </telerik:RadMaskedTextBox>
                                 </td>
                             </tr>
                             <tr>
