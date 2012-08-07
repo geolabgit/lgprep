@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="OzolsCopy">
+  <DataContextMoniker Name="/OzolsCopyDataContext" />
+  <nestedChildShapes>
+    <classShape Id="aea72b06-06bd-4e93-8def-6dc7cd61019a" absoluteBounds="1.5, 3.25, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/OzolsCopyDataContext/pusT_kTuristApstakliTarif" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e256e269-04cc-4256-97c7-6de2b045779e" absoluteBounds="1.5150000000000001, 3.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ae0f3e3e-9297-43f1-8166-3233d2a42eff" absoluteBounds="4.25, 2, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/OzolsCopyDataContext/pusT_PolTuristiSarakst" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e2b53378-c3e0-48bf-ad04-e4ca74f3a0f9" absoluteBounds="4.2650000000000006, 2.46, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

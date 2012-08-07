@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Ozolsdbs_copy" Class="OzolsCopyDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=putra;Initial Catalog=Ozolsdbs_copy;Persist Security Info=True;User ID=psutan" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Ozolsdbs_copyConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.pusT_kTuristApstakliTarif" Member="pusT_kTuristApstakliTarifs">
+    <Type Name="pusT_kTuristApstakliTarif">
+      <Column Name="TuristApstakli_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TuristTeritorija_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TuristApstakli" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="Koef" Type="System.Decimal" DbType="Decimal(6,3) NOT NULL" CanBeNull="false" />
+      <Column Name="Datums_No" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Datums_Li" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="TarifGroup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TuristApstakli_eng" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.pusT_PolTuristiSaraksts" Member="pusT_PolTuristiSaraksts">
+    <Type Name="pusT_PolTuristiSarakst">
+      <Column Name="PolTuristiSaraksts" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Polises_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Vards" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="Uzvards" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="PersKods" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="ApdrNemajs" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Apstaklis_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SpecDatumsNo" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SpecDatumsLi" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Fransize" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="PolDarbDienas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DzDatums" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsResident" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="HomeAddress" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="GuestAddress" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="IsLegal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PassID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
