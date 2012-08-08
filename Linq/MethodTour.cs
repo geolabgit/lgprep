@@ -35,9 +35,7 @@ namespace TelerikGreed.Linq
             List<TouristApstInfo> lstApst = GetApstList(intTerritoryID);
 
             foreach (TouristInfo n in lstTourists)
-            {
                 n.Apstaklis = lstApst.Find(e => e.TuristApstakli_ID == (n.Apstaklis_ID.HasValue ? n.Apstaklis_ID.Value : 0)).TuristApstakli;
-            }
             
             return lstTourists;
         }
@@ -87,7 +85,6 @@ namespace TelerikGreed.Linq
 
             if (itemTourist != null)
             {
-                //update entity's state
                 itemTourist.Apstaklis = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).Text;
                 int intSelectedIndex = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).SelectedIndex;
                 itemTourist.Apstaklis_ID = GetApstList(intTerritoryID)[intSelectedIndex].TuristApstakli_ID;
@@ -97,14 +94,13 @@ namespace TelerikGreed.Linq
 
         public static TouristInfo GetTouristVardUzvard(string strPersKods)
         {
-            TouristInfo TouristVU = (from oneRow in linqContext.pusT_PolTuristiSaraksts
-                                     where oneRow.PersKods.Equals(strPersKods)
-                                     select new TouristInfo()
-                                     {
-                                         Vards = oneRow.Vards,
-                                         Uzvards = oneRow.Uzvards
-                                     }).FirstOrDefault();
-            return TouristVU;
+            return (from oneRow in linqContext.pusT_PolTuristiSaraksts
+                    where oneRow.PersKods.Equals(strPersKods)
+                    select new TouristInfo()
+                    {
+                        Vards = oneRow.Vards,
+                        Uzvards = oneRow.Uzvards
+                    }).FirstOrDefault();
         }
     }
 }
