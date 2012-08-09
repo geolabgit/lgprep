@@ -42,7 +42,7 @@ namespace TelerikGreed
         {
             var ddlApstaklisontrol = (RadComboBox)editableItem.FindControl("ddlApstaklis");
             MethodTour.FillApstDDL(ddlApstaklisontrol, 0, MethodTour.GetApstList(intTerritoryID));
-            ((CheckBox)editableItem.FindControl("chkResidents")).Checked = true;
+            
         }
 
         protected void grdTouristsList_InsertCommand(object source, GridCommandEventArgs e)

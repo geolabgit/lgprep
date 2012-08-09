@@ -47,7 +47,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                     <telerik:GridBoundColumn DataField="Uzvards" HeaderText="Uzvards" />
                     <%--                    <telerik:GridBoundColumn DataField="Apstaklis_ID"  HeaderText="Apstaklis_ID"  />--%>
                     <telerik:GridBoundColumn DataField="Apstaklis"  HeaderText="Apstaklis"  ItemStyle-Width="170"  />
-                    
+
                     <telerik:GridDateTimeColumn DataField="SpecDatumsNo" HeaderText="Spec. Datums No" ItemStyle-Width="20"  DataType="System.DateTime" DataFormatString="{0:d}"  />
                     <telerik:GridDateTimeColumn DataField="SpecDatumsLi" HeaderText="Spec. Datums Līdz" ItemStyle-Width="20"   DataType="System.DateTime" DataFormatString="{0:d}" />
                     <telerik:GridBoundColumn DataField="PolDarbDienas" HeaderText="Dienas" />
@@ -58,25 +58,28 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                 <EditFormSettings InsertCaption="Pievienot nākamo apdrošināto" CaptionFormatString="Labot apdrošināto" EditFormType="Template" PopUpSettings-Modal="true" >
                     <EditColumn ButtonType="ImageButton"  />
                     <FormTemplate>
-                        <table id="tblEditTemplate" cellspacing="1" cellpadding="1" width="350" border="0">
-                            <tr>
+                        <table id="tblEditTemplate" cellspacing="1" cellpadding="1" width="350" border="0" >
+
                             <tr>
                                 <td>
                                     Residents:
                                 </td>
                                 <td>
-                                    <asp:CheckBox ID="chkResidents"  Checked ='<%# Bind("IsResident") %>' OnCheckedChanged="chkResidents_OnCheckedChanged" AutoPostBack="True" runat="server" />
-                        
+                                    <asp:CheckBox ID="chkResidents" 
+                                                  OnCheckedChanged="chkResidents_OnCheckedChanged" AutoPostBack="True" 
+                                                  Checked='<%# (Container is GridEditFormInsertItem) ? true : Eval("IsResident") %>'  
+                                                  runat="server" />
                                 </td>
                             </tr>
+                            <tr>
                                 <td>
                                     Pers. Kods:
                                 </td>
                                 <td>
-                                    <telerik:RadMaskedTextBox ID="txtPersKods" runat="server" SelectionOnFocus="SelectAll" AutoPostBack="True" Text='<%# Bind( "PersKods") %>'
+                                    <telerik:RadMaskedTextBox ID="txtPersKods" runat="server" SelectionOnFocus="SelectAll" AutoPostBack="True" Text='<%# Bind("PersKods") %>'
                                                               PromptChar="_" Width="85px" Mask="###########" OnTextChanged="txtPersKods_OnTextChanged" Visible="true"/>
                                     <%--PromptChar="_" Width="85px" Mask="<0..4><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9>" OnTextChanged="txtPersKods_OnTextChanged">--%>
-                                   <telerik:RadDatePicker ID="dteDzimDate" runat="server" MinDate="1/1/1910" MaxDate="1/1/2015" DbSelectedDate='<%# Bind("SpecDatumsNo") %>' Width="70pt" 
+                                    <telerik:RadDatePicker ID="dteDzimDate" runat="server" MinDate="1/1/1910" MaxDate="1/1/2015" DbSelectedDate='<%# Bind("SpecDatumsNo") %>' Width="70pt" 
                                                            Calendar-CultureInfo="(Default)"
                                                            DateInput-DateFormat="dd.MM.yyyy" DateInput-DisplayDateFormat="dd.MM.yyyy" Culture="lv-LV"
                                                            DateInput-EnableSingleInputRendering="false" Visible = "false"/>
@@ -87,8 +90,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                                     Vārds:
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtVards" Text='<%# Bind( "Vards") %>' runat="server">
-                                    </asp:TextBox>
+                                    <asp:TextBox ID="txtVards" Text='<%# Bind( "Vards") %>' runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -96,8 +98,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                                     Uzvārds:
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtUzvards" Text='<%# Bind( "Uzvards") %>' runat="server">
-                                    </asp:TextBox>
+                                    <asp:TextBox ID="txtUzvards" Text='<%# Bind( "Uzvards") %>' runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -124,7 +125,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                                     <telerik:RadDatePicker ID="dteSpecDatumsNo" runat="server" MinDate="1/1/1990" DbSelectedDate='<%# Bind("SpecDatumsNo") %>' Width="70pt" 
                                                            Calendar-CultureInfo="(Default)"
                                                            DateInput-DateFormat="dd.MM.yyyy" DateInput-DisplayDateFormat="dd.MM.yyyy" Culture="lv-LV"
-                                                           DateInput-EnableSingleInputRendering="false"> </telerik:RadDatePicker>
+                                                           DateInput-EnableSingleInputRendering="false" />
                                 </td>
                             </tr>
                             <tr>
@@ -136,7 +137,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                                     <telerik:RadDatePicker ID="dteSpecDatumsLi" runat="server" MinDate="1/1/1990" DbSelectedDate='<%# Bind("SpecDatumsLi") %>'  Width="70pt"
                                                            Calendar-CultureInfo="(Default)"
                                                            DateInput-DateFormat="dd.MM.yyyy" DateInput-DisplayDateFormat="dd.MM.yyyy" Culture="lv-LV"
-                                                           DateInput-EnableSingleInputRendering="false"> </telerik:RadDatePicker>
+                                                           DateInput-EnableSingleInputRendering="false" />
                                 </td>
                             </tr>
                         </table>
@@ -144,10 +145,9 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                             <tr>
                                 <td align="right" colspan="2">
                                     <asp:Button ID="Button1" Text='<%# (Container is GridEditFormInsertItem) ? "Pievienot" : "Labot" %>'
-                                                runat="server" CommandName='<%# (Container is GridEditFormInsertItem) ? "PerformInsert" : "Update" %>'>
-                                    </asp:Button>&nbsp;
-                                    <asp:Button ID="Button2" Text="Atcelt" runat="server" CausesValidation="False" CommandName="Cancel">
-                                    </asp:Button>
+                                                runat="server" CommandName='<%# (Container is GridEditFormInsertItem) ? "PerformInsert" : "Update" %>' />
+                                    &nbsp;
+                                    <asp:Button ID="Button2" Text="Atcelt" runat="server" CausesValidation="False" CommandName="Cancel" />
                                 </td>
                             </tr>
                         </table>
