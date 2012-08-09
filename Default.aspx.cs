@@ -26,7 +26,7 @@ namespace TelerikGreed
 
         private void ShowErrorMessage()
         {
-             RadAjaxManager1.ResponseScripts.Add(string.Format("window.radalert(\"Please enter valid data!\")"));
+            RadAjaxManager1.ResponseScripts.Add(string.Format("window.radalert(\"Please enter valid data!\")"));
         }
 
         protected void grdTouristsList_ItemCreated(object sender, GridItemEventArgs e)
@@ -42,6 +42,7 @@ namespace TelerikGreed
         {
             var ddlApstaklisontrol = (RadComboBox)editableItem.FindControl("ddlApstaklis");
             MethodTour.FillApstDDL(ddlApstaklisontrol, 0, MethodTour.GetApstList(intTerritoryID));
+            ((CheckBox)editableItem.FindControl("chkResidents")).Checked = true;
         }
 
         protected void grdTouristsList_InsertCommand(object source, GridCommandEventArgs e)
@@ -73,6 +74,7 @@ namespace TelerikGreed
             {
                 itemTourist.SpecDatumsLi = (DateTime)values["SpecDatumsLi"];
             }
+            itemTourist.IsResident = ((CheckBox)editableItem.FindControl("chkResidents")).Checked;
             int intSelectedIndex = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).SelectedIndex;
             itemTourist.Apstaklis_ID = MethodTour.GetApstList(intTerritoryID)[intSelectedIndex].TuristApstakli_ID;
             itemTourist.Apstaklis = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).Text;
@@ -120,6 +122,15 @@ namespace TelerikGreed
                 txtUzVards.Text = TouristVU.Uzvards;
                 txtVards.Focus();
             }
+        }
+
+        protected void chkResidents_OnCheckedChanged(object sender, System.EventArgs e)
+        {
+            var editableItem = (GridEditableItem)Session["editableItem"];
+            var blnResidents = ((CheckBox)editableItem.FindControl("chkResidents")).Checked;
+
+            ((RadMaskedTextBox)editableItem.FindControl("txtPersKods")).Visible = blnResidents;
+            ((RadDatePicker)editableItem.FindControl("dteDzimDate")).Visible = !blnResidents;
         }
     }
 }

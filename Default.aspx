@@ -41,15 +41,17 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
 
                 <Columns>
                     <telerik:GridEditCommandColumn ButtonType="ImageButton" ItemStyle-Width="10" />
-                    <telerik:GridCheckBoxColumn DataField="ApdrNemajs" HeaderText="Apdr.Ņēm."  ReadOnly="True" ItemStyle-Width="10" />
+                    <telerik:GridCheckBoxColumn DataField="IsResident" HeaderText="Residents"  ReadOnly="True" ItemStyle-Width="10" />
                     <telerik:GridBoundColumn DataField="PersKods" HeaderText="Pers. Kods" ItemStyle-Width="20"/>
                     <telerik:GridBoundColumn DataField="Vards" HeaderText="Vards" />
                     <telerik:GridBoundColumn DataField="Uzvards" HeaderText="Uzvards" />
                     <%--                    <telerik:GridBoundColumn DataField="Apstaklis_ID"  HeaderText="Apstaklis_ID"  />--%>
                     <telerik:GridBoundColumn DataField="Apstaklis"  HeaderText="Apstaklis"  ItemStyle-Width="170"  />
-
+                    
                     <telerik:GridDateTimeColumn DataField="SpecDatumsNo" HeaderText="Spec. Datums No" ItemStyle-Width="20"  DataType="System.DateTime" DataFormatString="{0:d}"  />
                     <telerik:GridDateTimeColumn DataField="SpecDatumsLi" HeaderText="Spec. Datums Līdz" ItemStyle-Width="20"   DataType="System.DateTime" DataFormatString="{0:d}" />
+                    <telerik:GridBoundColumn DataField="PolDarbDienas" HeaderText="Dienas" />
+                    <telerik:GridBoundColumn DataField="Fransize" HeaderText="Prēmija" />
                     <telerik:GridButtonColumn ConfirmText="Dzēst apdrošināto?" ConfirmDialogType="RadWindow"
                                               ConfirmTitle="Dzēst" ButtonType="ImageButton" CommandName="Delete"  ItemStyle-Width="10"  />
                 </Columns>
@@ -58,14 +60,26 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                     <FormTemplate>
                         <table id="tblEditTemplate" cellspacing="1" cellpadding="1" width="350" border="0">
                             <tr>
+                            <tr>
+                                <td>
+                                    Residents:
+                                </td>
+                                <td>
+                                    <asp:CheckBox ID="chkResidents"  Checked ='<%# Bind("IsResident") %>' OnCheckedChanged="chkResidents_OnCheckedChanged" AutoPostBack="True" runat="server" />
+                        
+                                </td>
+                            </tr>
                                 <td>
                                     Pers. Kods:
                                 </td>
                                 <td>
                                     <telerik:RadMaskedTextBox ID="txtPersKods" runat="server" SelectionOnFocus="SelectAll" AutoPostBack="True" Text='<%# Bind( "PersKods") %>'
-                                                              PromptChar="_" Width="85px" Mask="###########" OnTextChanged="txtPersKods_OnTextChanged">
+                                                              PromptChar="_" Width="85px" Mask="###########" OnTextChanged="txtPersKods_OnTextChanged" Visible="true"/>
                                     <%--PromptChar="_" Width="85px" Mask="<0..4><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9>" OnTextChanged="txtPersKods_OnTextChanged">--%>
-                                    </telerik:RadMaskedTextBox>
+                                   <telerik:RadDatePicker ID="dteDzimDate" runat="server" MinDate="1/1/1910" MaxDate="1/1/2015" DbSelectedDate='<%# Bind("SpecDatumsNo") %>' Width="70pt" 
+                                                           Calendar-CultureInfo="(Default)"
+                                                           DateInput-DateFormat="dd.MM.yyyy" DateInput-DisplayDateFormat="dd.MM.yyyy" Culture="lv-LV"
+                                                           DateInput-EnableSingleInputRendering="false" Visible = "false"/>
                                 </td>
                             </tr>
                             <tr>

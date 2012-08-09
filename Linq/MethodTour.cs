@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
 namespace TelerikGreed.Linq
@@ -85,6 +86,7 @@ namespace TelerikGreed.Linq
 
             if (itemTourist != null)
             {
+                itemTourist.IsResident = ((CheckBox)editableItem.FindControl("chkResidents")).Checked;
                 itemTourist.Apstaklis = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).Text;
                 int intSelectedIndex = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).SelectedIndex;
                 itemTourist.Apstaklis_ID = GetApstList(intTerritoryID)[intSelectedIndex].TuristApstakli_ID;
