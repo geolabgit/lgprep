@@ -1,6 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Ozolsdbs_copy" Class="OzolsCopyDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=putra;Initial Catalog=Ozolsdbs_copy;Persist Security Info=True;User ID=psutan" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Ozolsdbs_copyConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.pusT_kTuristApstakliTarif" Member="pusT_kTuristApstakliTarifs">
+﻿<?xml version="1.0" encoding="utf-8"?>  <Table Name="dbo.pusT_kTuristApstakliTarif" Member="pusT_kTuristApstakliTarifs">
     <Type Name="pusT_kTuristApstakliTarif">
       <Column Name="TuristApstakli_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TuristTeritorija_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
