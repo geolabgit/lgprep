@@ -34,8 +34,8 @@ namespace TelerikGreed.Linq
                                    IsLegal = oneRow.IsLegal.Value,
                                    PassID = oneRow.PassID
                                }).ToList();
-            List<TouristApstInfo> lstApst = GetApstList(intTerritoryID);
 
+            List<TouristApstInfo> lstApst = GetApstList(intTerritoryID);
             foreach (TouristInfo n in lstTourists)
                 n.Apstaklis = lstApst.Find(e => e.TuristApstakli_ID == (n.Apstaklis_ID.HasValue ? n.Apstaklis_ID.Value : 0)).TuristApstakli;
             

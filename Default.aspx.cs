@@ -21,7 +21,7 @@ namespace TelerikGreed
             }
             set
             {
-                Session["lstTourists"] = value;
+                Session["touristsList"] = value;
             }
         }
 
@@ -37,8 +37,8 @@ namespace TelerikGreed
             }
         }
 
-        int intTerritoryID = 1;
-        int intTouristsTableID = 2820052;  //   2819550 
+        const int intTerritoryID = 1;
+        const int intTouristsTableID = 2820052;  //   2819550 
 
         #endregion
 
@@ -81,6 +81,8 @@ namespace TelerikGreed
             }
         }
 
+        #region Insert, Update, Delete in grid
+
         protected void grdTouristsList_InsertCommand(object source, GridCommandEventArgs e)
         {
             var editableItem = ((GridEditableItem)e.Item);
@@ -89,7 +91,7 @@ namespace TelerikGreed
             //populate its properties
             Hashtable values = new Hashtable();
             editableItem.ExtractValues(values);
-            
+
             if (values["PersKods"] != null)
             {
                 itemTourist.PersKods = (string)values["PersKods"];
@@ -137,8 +139,10 @@ namespace TelerikGreed
 
             MethodTour.UpdateTouristFromList(TouristsList, intTerritoryID, (GridEditableItem)e.Item);
             this.grdTouristsList.DataSource = TouristsList;
-        }
+        } 
+        #endregion
 
+        #region Fields events
         protected void txtPersKods_OnTextChanged(object sender, System.EventArgs e)
         {
             var txtPersKods = (RadMaskedTextBox)EditableItem.FindControl("txtPersKods");
@@ -148,19 +152,19 @@ namespace TelerikGreed
                 return;
             }
             var TouristVU = MethodTour.GetTouristVardUzvard(txtPersKods.Text);
-            if (TouristVU == null)
+            var txtVards = (TextBox)EditableItem.FindControl("txtVards");
+            var txtUzVards = (TextBox)EditableItem.FindControl("txtUzVards");
+            if (TouristVU != null)
             {
-                ShowErrorMessage();
-                txtPersKods.Focus();
+                txtVards.Text = TouristVU.Vards;
+                txtUzVards.Text = TouristVU.Uzvards;
             }
             else
             {
-                var txtVards = (TextBox)EditableItem.FindControl("txtVards");
-                var txtUzVards = (TextBox)EditableItem.FindControl("txtUzVards");
-                txtVards.Text = TouristVU.Vards;
-                txtUzVards.Text = TouristVU.Uzvards;
-                txtVards.Focus();
+                txtVards.Text = string.Empty;
+                txtUzVards.Text = string.Empty;
             }
+            txtVards.Focus();
         }
 
         protected void chkResidents_OnCheckedChanged(object sender, System.EventArgs e)
@@ -169,6 +173,7 @@ namespace TelerikGreed
 
             ((RadMaskedTextBox)EditableItem.FindControl("txtPersKods")).Visible = blnResidents;
             ((RadDatePicker)EditableItem.FindControl("dteDzimDate")).Visible = !blnResidents;
-        }
+        } 
+        #endregion
     }
 }
