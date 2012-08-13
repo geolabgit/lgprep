@@ -79,7 +79,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                                     <telerik:RadMaskedTextBox ID="txtPersKods" runat="server" SelectionOnFocus="SelectAll" AutoPostBack="True" Text='<%# Bind("PersKods") %>'
                                                               PromptChar="_" Width="85px" Mask="###########" OnTextChanged="txtPersKods_OnTextChanged" Visible="true"/>
                                     <%--PromptChar="_" Width="85px" Mask="<0..4><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9><0..9>" OnTextChanged="txtPersKods_OnTextChanged">--%>
-                                    <telerik:RadDatePicker ID="dteDzimDate" runat="server" MinDate="1/1/1910" MaxDate="1/1/2015" DbSelectedDate='<%# Bind("SpecDatumsNo") %>' Width="70pt" 
+                                    <telerik:RadDatePicker ID="dteDzimDate" runat="server" MinDate="1/1/1910" MaxDate="1/1/2015" DbSelectedDate='<%# Bind("DzDatums") %>' Width="70pt" 
                                                            Calendar-CultureInfo="(Default)"
                                                            DateInput-DateFormat="dd.MM.yyyy" DateInput-DisplayDateFormat="dd.MM.yyyy" Culture="lv-LV"
                                                            DateInput-EnableSingleInputRendering="false" Visible = "false"/>

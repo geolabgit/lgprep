@@ -37,30 +37,5 @@ namespace TelerikGreed.Linq
         public int TarifGroup { get; set; }
     }
 
-    //public class CustomCheckBox : CheckBox
-    //{
-    //    private bool _checked;
-
-    //    public CustomCheckBox()
-    //    {
-    //        _checked = base.Checked;
-    //    }
-
-    //    public override bool Checked
-    //    {
-    //        get
-    //        {
-    //            return _checked;
-    //        }
-    //        set
-    //        {
-    //            if (value.GetType() == DBNull.Value.GetType())
-    //                _checked = false;
-    //            else if (value.GetType() == typeof(bool))
-    //                _checked = (bool)value;
-    //            else
-    //                _checked = false;
-    //        }
-    //    }
-    //} 
+  
 }

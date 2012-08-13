@@ -9,6 +9,7 @@ namespace TelerikGreed.Linq
     public class MethodTour
     {
         static readonly OzolsCopyDataContext linqContext = new OzolsCopyDataContext(TelerikGreed.Properties.Settings.Default.DBSConnection);
+
         public static List<TouristInfo> GetTouristList(int intPolNumber, int intTerritoryID)
         {
             var lstTourists = (from oneRow in linqContext.pusT_PolTuristiSaraksts
@@ -74,23 +75,34 @@ namespace TelerikGreed.Linq
             }
         }
 
-        public static void DeleteTouristFromList(List<TouristInfo> lstTourists, int intTouristId)
+        public static void DeleteTouristFromList(List<TouristInfo> lstTourists, GridEditableItem editableItem)
         {
+            var intTouristId = (int)editableItem.GetDataKeyValue("PolTuristiSaraksts");
             var itemTourist = lstTourists.Where(n => n.PolTuristiSaraksts == intTouristId).FirstOrDefault();
             lstTourists.Remove(itemTourist);
         }
 
-        public static void UpdateTouristFromList(List<TouristInfo> lstTourists, int intTouristId, int intTerritoryID, GridEditableItem editableItem)
+        public static void UpdateTouristFromList(List<TouristInfo> lstTourists, int intTerritoryID, GridEditableItem editableItem)
         {
+            var intTouristId = (int)editableItem.GetDataKeyValue("PolTuristiSaraksts");
             var itemTourist = lstTourists.Where(n => n.PolTuristiSaraksts == intTouristId).FirstOrDefault();
-
+            
             if (itemTourist != null)
             {
-                itemTourist.IsResident = ((CheckBox)editableItem.FindControl("chkResidents")).Checked;
+                editableItem.UpdateValues(itemTourist);
                 itemTourist.Apstaklis = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).Text;
                 int intSelectedIndex = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).SelectedIndex;
                 itemTourist.Apstaklis_ID = GetApstList(intTerritoryID)[intSelectedIndex].TuristApstakli_ID;
-                editableItem.UpdateValues(itemTourist);
+
+                itemTourist.IsResident = ((CheckBox)editableItem.FindControl("chkResidents")).Checked;
+                if (itemTourist.IsResident)
+                {
+                    itemTourist.DzDatums = null;
+                }
+                else
+                {
+                    itemTourist.PersKods = string.Empty;
+                }
             }
         }
 
