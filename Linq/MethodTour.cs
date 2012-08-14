@@ -35,10 +35,11 @@ namespace TelerikGreed.Linq
                                    PassID = oneRow.PassID
                                }).ToList();
 
-            List<TouristApstInfo> lstApst = GetApstList(intTerritoryID);
             foreach (TouristInfo n in lstTourists)
-                n.Apstaklis = lstApst.Find(e => e.TuristApstakli_ID == (n.Apstaklis_ID.HasValue ? n.Apstaklis_ID.Value : 0)).TuristApstakli;
-            
+            {
+                int intApstId = (n.Apstaklis_ID.HasValue) ? n.Apstaklis_ID.Value : 0;
+                n.Apstaklis = GetApstList(intTerritoryID).Find(e => e.TuristApstakli_ID == intApstId).TuristApstakli;
+            }
             return lstTourists;
         }
 

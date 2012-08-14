@@ -124,6 +124,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Linq\MethodTour.cs" />
+    <Compile Include="Linq\OzolsCopy.cs">
+      <DependentUpon>OzolsCopy.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Linq\OzolsCopy.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

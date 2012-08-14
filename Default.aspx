@@ -58,7 +58,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                 <EditFormSettings InsertCaption="Pievienot nākamo apdrošināto" CaptionFormatString="Labot apdrošināto" EditFormType="Template" PopUpSettings-Modal="true" >
                     <EditColumn ButtonType="ImageButton"  />
                     <FormTemplate>
-                        <table id="tblEditTemplate" cellspacing="1" cellpadding="1" width="350" border="0" >
+                        <table id="tblEditTemplate" width="350"  >
 
                             <tr>
                                 <td>
@@ -122,8 +122,8 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                                 </td>
                                 <td>
 
-                                    <telerik:RadDatePicker ID="dteSpecDatumsNo" runat="server" MinDate="1/1/1990" DbSelectedDate='<%# Bind("SpecDatumsNo") %>' Width="70pt" 
-                                                           Calendar-CultureInfo="(Default)"
+                                    <telerik:RadDatePicker ID="dteSpecDatumsNo" runat="server" DbSelectedDate='<%# Bind("SpecDatumsNo") %>' Width="70pt" 
+                                                           Calendar-CultureInfo="lv-LV"
                                                            DateInput-DateFormat="dd.MM.yyyy" DateInput-DisplayDateFormat="dd.MM.yyyy" Culture="lv-LV"
                                                            DateInput-EnableSingleInputRendering="false" />
                                 </td>
@@ -134,8 +134,8 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
                                 </td>
                                 <td>
 
-                                    <telerik:RadDatePicker ID="dteSpecDatumsLi" runat="server" MinDate="1/1/1990" DbSelectedDate='<%# Bind("SpecDatumsLi") %>'  Width="70pt"
-                                                           Calendar-CultureInfo="(Default)"
+                                    <telerik:RadDatePicker ID="dteSpecDatumsLi" runat="server" DbSelectedDate='<%# Bind("SpecDatumsLi") %>'  Width="70pt"
+                                                           Calendar-CultureInfo="lv-LV"
                                                            DateInput-DateFormat="dd.MM.yyyy" DateInput-DisplayDateFormat="dd.MM.yyyy" Culture="lv-LV"
                                                            DateInput-EnableSingleInputRendering="false" />
                                 </td>
@@ -162,6 +162,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
         </telerik:RadGrid>
 
         <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+
         </telerik:RadWindowManager>
 
     </div>

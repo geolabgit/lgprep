@@ -44,8 +44,7 @@ namespace TelerikGreed
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                TouristsList = MethodTour.GetTouristList(intTouristsTableID, intTerritoryID);
+            if (!IsPostBack) TouristsList = MethodTour.GetTouristList(intTouristsTableID, intTerritoryID);
         }
 
         protected void grdTouristsList_NeedDataSource(object source, GridNeedDataSourceEventArgs e)

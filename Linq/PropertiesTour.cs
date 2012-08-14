@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Web.UI.WebControls;
 
 namespace TelerikGreed.Linq
 {
     public class TouristInfo
     {
-        private bool _checked;
         public int PolTuristiSaraksts { get; set; }
         public int Polises_ID { get; set; }
         public string Vards { get; set; }
