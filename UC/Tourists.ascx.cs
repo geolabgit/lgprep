@@ -7,9 +7,14 @@ using Telerik.Web.UI;
 
 namespace TelerikGreed.UC
 {
+
     public partial class TouristsUC : System.Web.UI.UserControl
     {
         #region Definitions
+        public event GridCommandEventHandler onTouristDeleted;
+        public event GridCommandEventHandler onTouristInserted;
+        public event GridCommandEventHandler onTouristUpdated;
+
         public List<TouristInfo> TouristsList
         {
             get
@@ -32,12 +37,24 @@ namespace TelerikGreed.UC
                 Session["editableItem"] = value;
             }
         }
-        public int intTerritoryID;
-        #endregion
-
-        protected void Page_Load(object sender, EventArgs e)
+        public int TerritoryID
         {
-
+            get
+            {
+                return (int)ViewState["territoryID"];
+            }
+            set
+            {
+                ViewState["territoryID"] = value;
+            }
+        }
+        #endregion
+  
+        protected void OnInit(EventArgs e)
+        {
+            grdTouristsList.DeleteCommand += new GridCommandEventHandler(onTouristDeleted);
+            grdTouristsList.InsertCommand += new GridCommandEventHandler(onTouristInserted);
+            grdTouristsList.UpdateCommand += new GridCommandEventHandler(onTouristUpdated);
         }
 
         protected void grdTouristsList_NeedDataSource(object source, GridNeedDataSourceEventArgs e)
@@ -57,7 +74,7 @@ namespace TelerikGreed.UC
         private void SetupInputManager(GridEditableItem editableItem)
         {
             var ddlApstaklisontrol = (RadComboBox)editableItem.FindControl("ddlApstaklis");
-            MethodTour.FillApstDDL(ddlApstaklisontrol, 0, MethodTour.GetApstList(intTerritoryID));
+            MethodTour.FillApstDDL(ddlApstaklisontrol, 0, MethodTour.GetApstList(TerritoryID));
             if (editableItem.ItemIndex > -1)
             {
                 var intTouristId = (int)editableItem.GetDataKeyValue("PolTuristiSaraksts");
@@ -105,23 +122,28 @@ namespace TelerikGreed.UC
             }
             itemTourist.IsResident = ((CheckBox)editableItem.FindControl("chkResidents")).Checked;
             int intSelectedIndex = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).SelectedIndex;
-            itemTourist.Apstaklis_ID = MethodTour.GetApstList(intTerritoryID)[intSelectedIndex].TuristApstakli_ID;
+            itemTourist.Apstaklis_ID = MethodTour.GetApstList(TerritoryID)[intSelectedIndex].TuristApstakli_ID;
             itemTourist.Apstaklis = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).Text;
 
             TouristsList.Add(itemTourist);
             this.grdTouristsList.DataSource = TouristsList;
+            if (onTouristInserted != null) onTouristInserted(this, e);
         }
 
         protected void grdTouristsList_DeleteCommand(object source, GridCommandEventArgs e)
         {
             MethodTour.DeleteTouristFromList(TouristsList, (GridEditableItem)e.Item);
             this.grdTouristsList.DataSource = TouristsList;
+            if (onTouristDeleted != null) onTouristDeleted(this, e);
+           
         }
 
         protected void grdTouristsList_UpdateCommand(object source, GridCommandEventArgs e)
         {
-            MethodTour.UpdateTouristFromList(TouristsList, intTerritoryID, (GridEditableItem)e.Item);
+            MethodTour.UpdateTouristFromList(TouristsList, TerritoryID, (GridEditableItem)e.Item);
             this.grdTouristsList.DataSource = TouristsList;
+            if (onTouristUpdated != null) onTouristUpdated(this, e);
+           
         }
 
         #endregion

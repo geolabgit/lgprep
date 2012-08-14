@@ -11,7 +11,7 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
     <telerik:RadFormDecorator runat="server" ID="m_FormDecorator" DecoratedControls="All" />
     <telerik:RadAjaxManager runat="server" ID="RadAjaxManager1" DefaultLoadingPanelID="RadAjaxLoadingPanel1">
         <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="grdTouristsList">
+            <telerik:AjaxSetting AjaxControlID="ucTourists">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="TouristUC" />
                 </UpdatedControls>
@@ -24,6 +24,13 @@ CodeBehind="Default.aspx.cs" Inherits="TelerikGreed._Default" %>
         Welcome to ASP.NET!
     </h2>
     <div>
-     <uc:TouristGrid ID="ucTourists"  runat="server" />
+        <uc:TouristGrid ID="ucTourists"  runat="server" OnTouristInserted="ucTourists_onTouristInserted" 
+                        OnTouristUpdated="ucTourists_onTouristUpdated" 
+                        onTouristDeleted="ucTourists_onTouristDeleted" />
+    </div>
+    <div>
+        <asp:Label ID="lblDeleted" runat="server" Text="" /><br />
+        <asp:Label ID="lblInserted" runat="server" Text="" /><br />
+        <asp:Label ID="lblUpdated" runat="server" Text="" />
     </div>
 </asp:Content>

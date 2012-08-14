@@ -56,5 +56,32 @@ namespace TelerikGreed {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::TelerikGreed.UC.TouristsUC ucTourists;
+        
+        /// <summary>
+        /// lblDeleted control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeleted;
+        
+        /// <summary>
+        /// lblInserted control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblInserted;
+        
+        /// <summary>
+        /// lblUpdated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUpdated;
     }
 }
