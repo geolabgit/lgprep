@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
-namespace TelerikGreed.Linq
+namespace TelerikGreed.UC
 {
     public class MethodTour
     {
@@ -87,7 +87,7 @@ namespace TelerikGreed.Linq
         {
             var intTouristId = (int)editableItem.GetDataKeyValue("PolTuristiSaraksts");
             var itemTourist = lstTourists.Where(n => n.PolTuristiSaraksts == intTouristId).FirstOrDefault();
-            
+             
             if (itemTourist != null)
             {
                 editableItem.UpdateValues(itemTourist);

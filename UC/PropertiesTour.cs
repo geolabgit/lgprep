@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TelerikGreed.Linq
+namespace TelerikGreed.UC
 {
     public class TouristInfo
     {
@@ -17,7 +17,7 @@ namespace TelerikGreed.Linq
         public decimal Fransize { get; set; }
         public int? PolDarbDienas { get; set; }
         public DateTime? DzDatums { get; set; }
-        public bool IsResident  { get; set; }
+        public bool IsResident { get; set; }
         public string HomeAddress { get; set; }
         public string GuestAddress { get; set; }
         public bool? IsLegal { get; set; }
@@ -34,6 +34,4 @@ namespace TelerikGreed.Linq
         public DateTime? DatumsLi { get; set; }
         public int TarifGroup { get; set; }
     }
-
-  
 }
