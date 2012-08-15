@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
-namespace TelerikGreed.Linq
+namespace TelerikGreed.UC
 {
     public class MethodTour
     {
@@ -17,7 +17,7 @@ namespace TelerikGreed.Linq
                                orderby oneRow.PolTuristiSaraksts
                                select new TouristInfo()
                                {
-                                   PolTuristiSaraksts = oneRow.PolTuristiSaraksts,
+                                   PolTuristiSaraksts = 0,
                                    Vards = oneRow.Vards,
                                    Uzvards = oneRow.Uzvards,
                                    PersKods = oneRow.PersKods,
@@ -34,16 +34,19 @@ namespace TelerikGreed.Linq
                                    IsLegal = oneRow.IsLegal.Value,
                                    PassID = oneRow.PassID
                                }).ToList();
-
+            int intCount = 0;
+            var ddlAp = new RadComboBox();
             foreach (TouristInfo n in lstTourists)
             {
-                int intApstId = (n.Apstaklis_ID.HasValue) ? n.Apstaklis_ID.Value : 0;
-                n.Apstaklis = GetApstList(intTerritoryID).Find(e => e.TuristApstakli_ID == intApstId).TuristApstakli;
+                if (!n.Apstaklis_ID.HasValue)
+                    n.Apstaklis_ID = 0;
+                var lstTouristApst = GetTouristApstList(intTerritoryID);
+                n.Apstaklis = lstTouristApst.Find(g => g.TuristApstakli_ID == n.Apstaklis_ID).TuristApstakli;
+                n.PolTuristiSaraksts = intCount++;
             }
             return lstTourists;
         }
-
-        public static List<TouristApstInfo> GetApstList(int intTerritoryID)
+        public static List<TouristApstInfo> GetTouristApstList(int intTerritoryID)
         {
             var lstApst = (from oneRow in linqContext.pusT_kTuristApstakliTarifs
                            where oneRow.TuristTeritorija_ID == intTerritoryID
@@ -60,20 +63,13 @@ namespace TelerikGreed.Linq
             });
             return lstApst;
         }
-
-        public static void FillApstDDL(RadComboBox ddlApst, int intSelected, List<TouristApstInfo> lstApst)
+        public static void FillApstDDL(RadComboBox ddlApst, List<TouristApstInfo> lstTouristApst, int intSelected, int intTerritoryID)
         {
-            try
-            {
-                ddlApst.DataSource = lstApst;
-                ddlApst.DataTextField = "TuristApstakli";
-                ddlApst.DataValueField = "TuristApstakli_ID";
-                ddlApst.DataBind();
-                ddlApst.SelectedValue = intSelected.ToString();
-            }
-            catch (Exception)
-            {
-            }
+            ddlApst.DataSource = lstTouristApst;
+            ddlApst.DataTextField = "TuristApstakli";
+            ddlApst.DataValueField = "TuristApstakli_ID";
+            ddlApst.DataBind();
+            ddlApst.SelectedValue = intSelected.ToString();
         }
 
         public static void DeleteTouristFromList(List<TouristInfo> lstTourists, GridEditableItem editableItem)
@@ -87,14 +83,12 @@ namespace TelerikGreed.Linq
         {
             var intTouristId = (int)editableItem.GetDataKeyValue("PolTuristiSaraksts");
             var itemTourist = lstTourists.Where(n => n.PolTuristiSaraksts == intTouristId).FirstOrDefault();
-            
+             
             if (itemTourist != null)
             {
                 editableItem.UpdateValues(itemTourist);
                 itemTourist.Apstaklis = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).Text;
-                int intSelectedIndex = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).SelectedIndex;
-                itemTourist.Apstaklis_ID = GetApstList(intTerritoryID)[intSelectedIndex].TuristApstakli_ID;
-
+                itemTourist.Apstaklis_ID = Convert.ToInt32(((RadComboBox)editableItem.FindControl("ddlApstaklis")).SelectedValue);
                 itemTourist.IsResident = ((CheckBox)editableItem.FindControl("chkResidents")).Checked;
                 if (itemTourist.IsResident)
                 {

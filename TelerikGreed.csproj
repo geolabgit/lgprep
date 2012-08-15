@@ -69,6 +69,7 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="UC\Tourists.ascx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -123,16 +124,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Linq\MethodTour.cs" />
-    <Compile Include="Linq\OzolsCopy.cs">
+    <Compile Include="UC\Tourists.ascx.cs">
+      <DependentUpon>Tourists.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UC\Tourists.ascx.designer.cs">
+      <DependentUpon>Tourists.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UC\MethodTour.cs" />
+    <Compile Include="UC\OzolsCopy.cs">
       <DependentUpon>OzolsCopy.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Linq\OzolsCopy.designer.cs">
+    <Compile Include="UC\OzolsCopy.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OzolsCopy.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Linq\PropertiesTour.cs" />
+    <Compile Include="UC\PropertiesTour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -155,7 +163,7 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Linq\OzolsCopy.dbml">
+    <None Include="UC\OzolsCopy.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>OzolsCopy.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
@@ -169,7 +177,7 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Linq\OzolsCopy.dbml.layout">
+    <None Include="UC\OzolsCopy.dbml.layout">
       <DependentUpon>OzolsCopy.dbml</DependentUpon>
     </None>
   </ItemGroup>

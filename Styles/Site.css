@@ -292,11 +292,3 @@ div.accountInfo
     text-align: right;
     padding-right: 10px;
 }
-table{
-border:0px; /* border="0" */
-border-collapse:collapse; /* cellspacing="0" */
-}
-
-table td{
-padding:0px; /* cellpadding="0" */
-}
