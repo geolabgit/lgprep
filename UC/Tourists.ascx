@@ -90,8 +90,8 @@
                             &nbsp;Apstaklis:
                         </td>
                         <td>
-                            <telerik:RadComboBox ID="ddlApstaklis" runat="server"  Width="200" AutoPostBack="True" SelectedValue ='<%# Bind( "Apstaklis_ID") %>' 
-                            OnSelectedIndexChanged="ddlApstaklis_OnSelectedIndexChanged" />
+                            <telerik:RadComboBox ID="ddlApstaklis" runat="server"  Width="200" AutoPostBack="True" SelectedValue ='<%# DataBinder.Eval(Container.DataItem, "Apstaklis_ID") %>' 
+                            OnSelectedIndexChanged="ddlApstaklis_OnSelectedIndexChanged" DataTextField="TuristApstakli" DataValueField="TuristApstakli_ID" />
 
                         </td>
                     </tr>

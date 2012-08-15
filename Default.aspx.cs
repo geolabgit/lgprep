@@ -9,7 +9,7 @@ namespace TelerikGreed
     {
         #region Definitions
         const int intTerritoryID = 1;
-        const int intPolisesID = 2820052;  //   2819550 
+        const int intPolisesID = 2820052;  //   2819550 2820052
 
         #endregion
         private void Page_Init(object sender, EventArgs e)
@@ -28,6 +28,7 @@ namespace TelerikGreed
                 ucTourists.MinSpecDatumsLi = DateTime.Today.AddDays(1);
                 ucTourists.MaxSpecDatumsLi = DateTime.Today.AddDays(180);
                 ucTourists.TerritoryID = intTerritoryID;
+                ucTourists.TouristsApstList = MethodTour.GetTouristApstList(intTerritoryID);
                 ucTourists.TouristsList = MethodTour.GetTouristList(intPolisesID, intTerritoryID);
 
             }

@@ -25,6 +25,17 @@ namespace TelerikGreed.UC
                 Session["touristsList"] = value;
             }
         }
+        public List<TouristApstInfo> TouristsApstList
+        {
+            get
+            {
+                return (List<TouristApstInfo>)Session["touristsApstList"];
+            }
+            set
+            {
+                Session["touristsApstList"] = value;
+            }
+        }
         private GridEditableItem EditableItem
         {
             get
@@ -117,16 +128,14 @@ namespace TelerikGreed.UC
         private void SetupInputManager(GridEditableItem editableItem)
         {
             var ddlApstaklisontrol = (RadComboBox)editableItem.FindControl("ddlApstaklis");
-   
-                MethodTour.FillApstDDL(ddlApstaklisontrol, 0, MethodTour.GetApstList(TerritoryID));
-                ((RadDatePicker)EditableItem.FindControl("dteSpecDatumsNo")).Enabled = false;
-                ((RadDatePicker)EditableItem.FindControl("dteSpecDatumsLi")).Enabled = false;
-                var DateNo = (RadDatePicker)editableItem.FindControl("dteSpecDatumsNo");
-                DateNo.MinDate = MinSpecDatumsNo;
-                DateNo.MaxDate = MaxSpecDatumsNo;
-                var DateLi = (RadDatePicker)editableItem.FindControl("dteSpecDatumsLi");
-                DateLi.MinDate = MinSpecDatumsLi;
-                DateLi.MaxDate = MaxSpecDatumsLi;
+
+            MethodTour.FillApstDDL(ddlApstaklisontrol, TouristsApstList,  0, TerritoryID);
+            var DateNo = (RadDatePicker)editableItem.FindControl("dteSpecDatumsNo");
+            DateNo.MinDate = MinSpecDatumsNo;
+            DateNo.MaxDate = MaxSpecDatumsNo;
+            var DateLi = (RadDatePicker)editableItem.FindControl("dteSpecDatumsLi");
+            DateLi.MinDate = MinSpecDatumsLi;
+            DateLi.MaxDate = MaxSpecDatumsLi;
             if (editableItem.ItemIndex > -1)
             {
                 var intTouristId = (int)editableItem.GetDataKeyValue("PolTuristiSaraksts");
@@ -173,8 +182,7 @@ namespace TelerikGreed.UC
                 itemTourist.SpecDatumsLi = (DateTime)values["SpecDatumsLi"];
             }
             itemTourist.IsResident = ((CheckBox)editableItem.FindControl("chkResidents")).Checked;
-            int intSelectedIndex = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).SelectedIndex;
-            itemTourist.Apstaklis_ID = MethodTour.GetApstList(TerritoryID)[intSelectedIndex].TuristApstakli_ID;
+            itemTourist.Apstaklis_ID = Convert.ToInt32(((RadComboBox)editableItem.FindControl("ddlApstaklis")).SelectedValue);
             itemTourist.Apstaklis = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).Text;
             itemTourist.PolTuristiSaraksts = TouristsList.Count;
 
@@ -242,11 +250,24 @@ namespace TelerikGreed.UC
             ((RadMaskedTextBox)EditableItem.FindControl("txtPersKods")).Visible = blnResidents;
             ((RadDatePicker)EditableItem.FindControl("dteDzimDate")).Visible = !blnResidents;
         }
+
         protected void ddlApstaklis_OnSelectedIndexChanged(object sender, System.EventArgs e)
         {
             var ApstaklisControl = (RadComboBox)EditableItem.FindControl("ddlApstaklis");
-            ((RadDatePicker)EditableItem.FindControl("dteSpecDatumsNo")).Enabled = !(ApstaklisControl.SelectedIndex == 0);
-            ((RadDatePicker)EditableItem.FindControl("dteSpecDatumsLi")).Enabled = !(ApstaklisControl.SelectedIndex == 0);
+            var DateNo = (RadDatePicker)EditableItem.FindControl("dteSpecDatumsNo");
+            var DateLi = (RadDatePicker)EditableItem.FindControl("dteSpecDatumsLi");
+            if (ApstaklisControl.SelectedIndex == 0)
+            {
+                DateNo.Enabled = false;
+                DateLi.Enabled = false;
+                DateNo.DbSelectedDate = null;
+                DateLi.DbSelectedDate = null;
+            }
+            else
+            {
+                DateNo.Enabled = true;
+                DateLi.Enabled = true;
+            }
         }
         #endregion
     }
