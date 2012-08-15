@@ -9,7 +9,7 @@ namespace TelerikGreed
     {
         #region Definitions
         const int intTerritoryID = 1;
-        const int intTouristsTableID = 2820052;  //   2819550 
+        const int intPolisesID = 2820052;  //   2819550 
 
         #endregion
         private void Page_Init(object sender, EventArgs e)
@@ -23,8 +23,13 @@ namespace TelerikGreed
         {
             if (!IsPostBack)
             {
+                ucTourists.MinSpecDatumsNo = DateTime.Today;
+                ucTourists.MaxSpecDatumsNo = DateTime.Today.AddDays(30);
+                ucTourists.MinSpecDatumsLi = DateTime.Today.AddDays(1);
+                ucTourists.MaxSpecDatumsLi = DateTime.Today.AddDays(180);
                 ucTourists.TerritoryID = intTerritoryID;
-                ucTourists.TouristsList = MethodTour.GetTouristList(intTouristsTableID, intTerritoryID);
+                ucTourists.TouristsList = MethodTour.GetTouristList(intPolisesID, intTerritoryID);
+
             }
         }
 
@@ -34,11 +39,14 @@ namespace TelerikGreed
         }
         protected void ucTourists_onTouristInserted(object sender, GridCommandEventArgs e)
         {
-            this.lblInserted.Text = "Inserted: "; // +((GridEditableItem)e.Item).GetDataKeyValue("PolTuristiSaraksts").ToString();
+           this.lblInserted.Text = "Inserted: " + ucTourists.TouristsList.Last().Uzvards; 
         }
         protected void ucTourists_onTouristUpdated(object sender, GridCommandEventArgs e)
         {
             this.lblUpdated.Text = "Updated: " + ((GridEditableItem)e.Item).GetDataKeyValue("PolTuristiSaraksts").ToString();
+            var intTouristId = (int)((GridEditableItem)e.Item).GetDataKeyValue("PolTuristiSaraksts");
+            var itemTourist = ucTourists.TouristsList.Where(n => n.PolTuristiSaraksts == intTouristId).FirstOrDefault();
+            itemTourist.Fransize = itemTourist.PolTuristiSaraksts * 5;
         }
     }
 }

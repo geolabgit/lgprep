@@ -17,7 +17,7 @@ namespace TelerikGreed.UC
                                orderby oneRow.PolTuristiSaraksts
                                select new TouristInfo()
                                {
-                                   PolTuristiSaraksts = oneRow.PolTuristiSaraksts,
+                                   PolTuristiSaraksts = 0,
                                    Vards = oneRow.Vards,
                                    Uzvards = oneRow.Uzvards,
                                    PersKods = oneRow.PersKods,
@@ -34,11 +34,12 @@ namespace TelerikGreed.UC
                                    IsLegal = oneRow.IsLegal.Value,
                                    PassID = oneRow.PassID
                                }).ToList();
-
+            int intCount = 0;
             foreach (TouristInfo n in lstTourists)
             {
                 int intApstId = (n.Apstaklis_ID.HasValue) ? n.Apstaklis_ID.Value : 0;
                 n.Apstaklis = GetApstList(intTerritoryID).Find(e => e.TuristApstakli_ID == intApstId).TuristApstakli;
+                n.PolTuristiSaraksts = intCount++;
             }
             return lstTourists;
         }

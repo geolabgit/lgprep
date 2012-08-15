@@ -34,4 +34,6 @@ namespace TelerikGreed.UC
         public DateTime? DatumsLi { get; set; }
         public int TarifGroup { get; set; }
     }
+
+
 }

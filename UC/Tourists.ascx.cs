@@ -7,7 +7,6 @@ using Telerik.Web.UI;
 
 namespace TelerikGreed.UC
 {
-
     public partial class TouristsUC : System.Web.UI.UserControl
     {
         #region Definitions
@@ -48,6 +47,50 @@ namespace TelerikGreed.UC
                 ViewState["territoryID"] = value;
             }
         }
+        public DateTime MinSpecDatumsNo
+        {
+            get
+            {
+                return (DateTime)ViewState["minSpecDatumsNo"];
+            }
+            set
+            {
+                ViewState["minSpecDatumsNo"] = value;
+            }
+        }
+        public DateTime MaxSpecDatumsNo
+        {
+            get
+            {
+                return (DateTime)ViewState["maxSpecDatumsNo"];
+            }
+            set
+            {
+                ViewState["maxSpecDatumsNo"] = value;
+            }
+        }
+        public DateTime MinSpecDatumsLi
+        {
+            get
+            {
+                return (DateTime)ViewState["minSpecDatumsLi"];
+            }
+            set
+            {
+                ViewState["minSpecDatumsLi"] = value;
+            }
+        }
+        public DateTime MaxSpecDatumsLi
+        {
+            get
+            {
+                return (DateTime)ViewState["maxSpecDatumsLi"];
+            }
+            set
+            {
+                ViewState["maxSpecDatumsLi"] = value;
+            }
+        }
         #endregion
   
         protected void OnInit(EventArgs e)
@@ -74,7 +117,16 @@ namespace TelerikGreed.UC
         private void SetupInputManager(GridEditableItem editableItem)
         {
             var ddlApstaklisontrol = (RadComboBox)editableItem.FindControl("ddlApstaklis");
-            MethodTour.FillApstDDL(ddlApstaklisontrol, 0, MethodTour.GetApstList(TerritoryID));
+   
+                MethodTour.FillApstDDL(ddlApstaklisontrol, 0, MethodTour.GetApstList(TerritoryID));
+                ((RadDatePicker)EditableItem.FindControl("dteSpecDatumsNo")).Enabled = false;
+                ((RadDatePicker)EditableItem.FindControl("dteSpecDatumsLi")).Enabled = false;
+                var DateNo = (RadDatePicker)editableItem.FindControl("dteSpecDatumsNo");
+                DateNo.MinDate = MinSpecDatumsNo;
+                DateNo.MaxDate = MaxSpecDatumsNo;
+                var DateLi = (RadDatePicker)editableItem.FindControl("dteSpecDatumsLi");
+                DateLi.MinDate = MinSpecDatumsLi;
+                DateLi.MaxDate = MaxSpecDatumsLi;
             if (editableItem.ItemIndex > -1)
             {
                 var intTouristId = (int)editableItem.GetDataKeyValue("PolTuristiSaraksts");
@@ -124,26 +176,36 @@ namespace TelerikGreed.UC
             int intSelectedIndex = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).SelectedIndex;
             itemTourist.Apstaklis_ID = MethodTour.GetApstList(TerritoryID)[intSelectedIndex].TuristApstakli_ID;
             itemTourist.Apstaklis = ((RadComboBox)editableItem.FindControl("ddlApstaklis")).Text;
+            itemTourist.PolTuristiSaraksts = TouristsList.Count;
 
             TouristsList.Add(itemTourist);
             this.grdTouristsList.DataSource = TouristsList;
-            if (onTouristInserted != null) onTouristInserted(this, e);
+              
+            if (onTouristInserted != null)
+            {
+                onTouristInserted(this, e);
+            }
         }
 
         protected void grdTouristsList_DeleteCommand(object source, GridCommandEventArgs e)
         {
             MethodTour.DeleteTouristFromList(TouristsList, (GridEditableItem)e.Item);
             this.grdTouristsList.DataSource = TouristsList;
-            if (onTouristDeleted != null) onTouristDeleted(this, e);
-           
+
+            if (onTouristDeleted != null)
+            {
+                onTouristDeleted(this, e);
+            }
         }
 
         protected void grdTouristsList_UpdateCommand(object source, GridCommandEventArgs e)
         {
             MethodTour.UpdateTouristFromList(TouristsList, TerritoryID, (GridEditableItem)e.Item);
             this.grdTouristsList.DataSource = TouristsList;
-            if (onTouristUpdated != null) onTouristUpdated(this, e);
-           
+            if (onTouristUpdated != null)
+            {
+                onTouristUpdated(this, e);
+            }
         }
 
         #endregion
@@ -179,6 +241,12 @@ namespace TelerikGreed.UC
 
             ((RadMaskedTextBox)EditableItem.FindControl("txtPersKods")).Visible = blnResidents;
             ((RadDatePicker)EditableItem.FindControl("dteDzimDate")).Visible = !blnResidents;
+        }
+        protected void ddlApstaklis_OnSelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            var ApstaklisControl = (RadComboBox)EditableItem.FindControl("ddlApstaklis");
+            ((RadDatePicker)EditableItem.FindControl("dteSpecDatumsNo")).Enabled = !(ApstaklisControl.SelectedIndex == 0);
+            ((RadDatePicker)EditableItem.FindControl("dteSpecDatumsLi")).Enabled = !(ApstaklisControl.SelectedIndex == 0);
         }
         #endregion
     }
